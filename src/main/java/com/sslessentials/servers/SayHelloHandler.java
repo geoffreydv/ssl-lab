@@ -9,12 +9,25 @@ import java.io.IOException;
 
 public class SayHelloHandler extends AbstractHandler {
 
+    private final boolean enforceSsl;
+
+    public SayHelloHandler(boolean enforceSsl) {
+        this.enforceSsl = enforceSsl;
+    }
+
     @Override
     public void handle(String targetUrl,
                        Request request,
                        HttpServletRequest httpServletRequest,
                        HttpServletResponse httpServletResponse) throws IOException {
-        httpServletResponse.getWriter().write("Hello");
+
         request.setHandled(true);
+
+        if (enforceSsl && !"https".equals(request.getScheme())) {
+            httpServletResponse.sendRedirect("https://" + httpServletRequest.getServerName() + targetUrl);
+            return;
+        }
+
+        httpServletResponse.getWriter().write("Hello");
     }
 }
