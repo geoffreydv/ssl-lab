@@ -20,4 +20,8 @@ openssl req -new -x509 -days 1826 -subj "/CN=SSL Essentials Lab CA" -key ca.priv
 openssl genrsa -out valid.key 4096
 openssl req -new -key valid.key -out valid.csr -subj "/CN=SSL Essentials Lab Valid"
 openssl x509 -req -CA ../ca/ca.crt -CAkey ../ca/ca.private.key -CAcreateserial -days 1826 -in valid.csr -out valid.crt
+
+# Create keystore
+
+openssl pkcs12 -export -clcerts -in valid.crt -inkey valid.key -out valid.p12 -name ssl_keypair -noiter -nomaciter
 ```
