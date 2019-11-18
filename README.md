@@ -15,6 +15,8 @@ openssl req -new -x509 -extensions v3_ca -keyout private/cakey.pem -out cacert.p
 ```shell script
 
 openssl req -new -nodes -out server-req.csr -keyout private/server-key.pem -days 3650 -config ./self_signed.conf
+openssl ca -out server-cert.pem -days 3650 -config ./self_signed.conf -copy_extensions -infiles server-req.csr
+ 
 
 # Sign with CA
 openssl ca -out server-cert.pem -days 3650 -config ./self_signed.conf -infiles server-req.csr 
