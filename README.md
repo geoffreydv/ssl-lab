@@ -22,6 +22,8 @@ openssl pkcs12 -export -clcerts -in valid.crt -inkey valid.key -out valid.p12 -n
 
 ### Creating a trust store from a CA
 
+OpenSSL can't create a p12 file with only a certificate in it, it fails if no private key is provided.
+
 ```shell script
-openssl pkcs12 -export -nokeys -in ../../servers/ca/ca.crt -out truststore.p12
+keytool -importcert -storetype PKCS12 -keystore truststore.p12 -storepass changeit -alias self_signed_ca -file ../../servers/ca/ca.crt -noprompt
 ```
