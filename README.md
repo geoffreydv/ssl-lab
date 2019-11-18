@@ -19,3 +19,9 @@ openssl req -new -key valid.key -out valid.csr -config <( cat valid.conf )
 openssl x509 -req -CA ../ca/ca.crt -CAkey ../ca/ca.private.key -CAcreateserial -days 1826 -in valid.csr -extfile v3.ext -out valid.crt
 openssl pkcs12 -export -clcerts -in valid.crt -inkey valid.key -out valid.p12 -name ssl_keypair -noiter -nomaciter
 ```
+
+### Creating a trust store from a CA
+
+```shell script
+openssl pkcs12 -export -nokeys -in ../../servers/ca/ca.crt -out truststore.p12
+```

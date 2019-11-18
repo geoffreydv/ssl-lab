@@ -22,5 +22,11 @@
             <artifactId>jetty-server</artifactId>
             <version>9.4.22.v20191022</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.10</version>
+        </dependency>
     </dependencies>
 </project>
