@@ -6,11 +6,11 @@ import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 
-public class ServerWithSSLEnabled {
+class ServerWithSSLEnabled {
 
     private final Server server;
 
-    public ServerWithSSLEnabled(String keystoreClasspathReference) {
+    ServerWithSSLEnabled(String keystoreClasspathReference) {
 
         server = new Server();
 
@@ -21,7 +21,7 @@ public class ServerWithSSLEnabled {
                 createHttpsConnector(server, keystoreClasspathReference)});
     }
 
-    public void start() throws Exception {
+    void start() throws Exception {
         server.start();
     }
 

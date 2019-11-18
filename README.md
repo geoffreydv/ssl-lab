@@ -27,3 +27,8 @@ OpenSSL can't create a p12 file with only a certificate in it, it fails if no pr
 ```shell script
 keytool -importcert -storetype PKCS12 -keystore truststore.p12 -storepass changeit -alias self_signed_ca -file ../../servers/ca/ca.crt -noprompt
 ```
+
+### Intermediate CA
+```
+
+```
