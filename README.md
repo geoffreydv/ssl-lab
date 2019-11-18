@@ -7,13 +7,17 @@ This project contains all kinds of correctly and incorrectly set up servers with
 ### Create a private key
 
 ```shell script
-openssl genrsa -out ca.private.key 4096
-openssl req -new -x509 -days 1826 -subj "/CN=SSL Essentials CA" -key ca.private.key -out ca.crt
+openssl req -new -x509 -extensions v3_ca -keyout private/cakey.pem -out cacert.pem -days 3650 -config ./self_signed.conf
 ```
 
 ### Valid Certificate
 
 ```shell script
+
+openssl req -new -nodes -out server-req.csr -keyout private/server-key.pem -days 3650 -config ./self_signed.conf
+
+# Sign with CA
+openssl ca -out server-cert.pem -days 3650 -config ./self_signed.conf -infiles server-req.csr 
 openssl genrsa -out valid.key 4096
 openssl req -new -key valid.key -out valid.csr -config <( cat valid.conf )
 openssl x509 -req -CA ../ca/ca.crt -CAkey ../ca/ca.private.key -CAcreateserial -days 1826 -in valid.csr -extfile v3.ext -out valid.crt
